@@ -15,3 +15,20 @@ jobs:
         type: 'zip'
         filename: 'upload.zip'
         exclusions: '*.git* /*node_modules/* .editorconfig'
+        
+  static_analysis:
+    name: Static Analysis
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Check out main branch
+        uses: actions/checkout@v2
+        
+      - name: Veracode Upload And Scan
+        uses: veracode/veracode-uploadandscan-action@0.2.6
+        with:
+          appname: 'NodeGoat-Demo'
+          createprofile: true
+          filepath: 'upload.zip'
+          vid: '${{ secrets.VERACODE_ID }}'
+          vkey: '${{ secrets.VERACODE_KEY }}'
