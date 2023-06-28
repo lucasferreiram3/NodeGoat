@@ -8,27 +8,36 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
-    - name: Archive Release
-      uses: thedoctor0/zip-release@0.7.1
-      with:
-        type: 'zip'
-        filename: 'upload.zip'
-        exclusions: '*.git* /*node_modules/* .editorconfig'
-        
-  static_analysis:
-    name: Static Analysis
-    runs-on: ubuntu-latest
-    
-    steps:
-      - name: Check out main branch
-        uses: actions/checkout@v2
-        
-      - name: Veracode Upload And Scan
-        uses: veracode/veracode-uploadandscan-action@0.2.6
+      - uses: actions/checkout@v2
+      - name: Empacotamento dos arquivos
+        uses: thedoctor0/zip-release@master
         with:
+          filename: 'veracode.zip'
+          path: .
+      - name: Publicando Artefato
+        uses: actions/upload-artifact@v2
+        with:
+          name: pacoteVeracode
+          path: veracode.zip
+        
+  Veracode_UploadAndScan:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Download Artefato
+        uses: actions/download-artifact@v2
+        with:
+          name: pacoteVeracode
+      - uses: veracode/veracode-uploadandscan-action@master # Faz a analise da Veracode
+        env:
+          VeracodeID: ${{ secrets.VERACODE_ID }} # Lembrar de criar as credenciais no Secrets
+          VeracodeKey: ${{ secrets.VERACODE_KEY}}
+        with:
+          vid: '$VeracodeID'
+          vkey: '$VeracodeKey'
+          criticality: 'VeryHigh'
           appname: 'NodeGoat-Demo'
           createprofile: true
-          filepath: 'upload.zip'
-          vid: '${{ secrets.VERACODE_ID }}'
-          vkey: '${{ secrets.VERACODE_KEY }}'
+          filepath: 'veracode.zip'
+          deleteIncompleteScan: false
+          version: ${{ github.run_id }}
