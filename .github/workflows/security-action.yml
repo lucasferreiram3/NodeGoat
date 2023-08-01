@@ -1,7 +1,7 @@
 name: security-action
 on:
   push:
-    branches: [feature-ejs]
+    branches: [treinamento]
 
 jobs:
 
@@ -48,5 +48,5 @@ jobs:
       - name: scan 
         run: |
           zip -r -v nodegoat.zip . -i '*.js' '*.html'
-          java -jar /opt/veracode/pipeline-scan.jar -vid "${{ secrets.VERACODE_ID }}" -vkey "${{ secrets.VERACODE_KEY }}" -f nodegoat.zip -p "NodeGoat-Demo" -pn "Veracode Recommended Medium"
+          java -jar /opt/veracode/pipeline-scan.jar -vid "${{ secrets.VERACODE_ID }}" -vkey "${{ secrets.VERACODE_KEY }}" -f nodegoat.zip -p "NodeGoat-Demo" -pn "Veracode Recommended High"
     continue-on-error: true
