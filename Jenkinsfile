@@ -1,7 +1,7 @@
 pipeline {
     agent any 
     environment {
-        caminhoPacote = 'nodegoat.tar.gz'
+        caminhoPacote = 'uploadToVeracode/nodegoat.tar.gz'
         wrapperVersion = '23.8.12.0'
     }
     stages {
