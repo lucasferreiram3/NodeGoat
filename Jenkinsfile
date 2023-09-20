@@ -5,12 +5,6 @@ pipeline {
         wrapperVersion = '23.8.12.0'
     }
     stages {
-        stage('Checkout') { 
-            steps {
-                git 'https://github.com/lucasferreiram3/NodeGoat.git'
-                sh 'ls -l'
-            }
-        }
         stage('Clean') { 
             steps {
                 sh 'rm -rf pipeline-scan-LATEST.zip pipeline-scan.jar'
