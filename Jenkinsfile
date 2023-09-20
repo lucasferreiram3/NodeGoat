@@ -14,7 +14,7 @@ pipeline {
         }
         stage('Archive') { 
             steps {
-                sh 'find . -name "*.js" -o -name "*.html" -o -name "*.htm" -o -name "*.ts" -o -name "*.tsx" -o -name "*.json" -o -name "*.css" -o -name "*.jsp" -o -name "*.vue" | tar --exclude=./node_modules --exclude=nodegoat.tar.gz -czf nodegoat.tar.gz .'
+                sh 'find . -name "*.js" -o -name "*.html" -o -name "*.htm" -o -name "*.ts" -o -name "*.tsx" -o -name "*.json" -o -name "*.css" -o -name "*.jsp" -o -name "*.vue" | tar --exclude=/node_modules --exclude=nodegoat.tar.gz -czf nodegoat.tar.gz .'
                 sh 'tar -tvf nodegoat.tar.gz'
             }
         }
