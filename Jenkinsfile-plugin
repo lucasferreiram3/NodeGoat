@@ -36,6 +36,14 @@ pipeline {
             }
         }
 
+       stage('Veracode SAST - Policy Scan') { 
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'veracode-credentials', passwordVariable: 'VKEY', usernameVariable: 'VID')]) {
+                    veracode applicationName: 'NodeGoat-Demo', createSandbox: false, criticality: 'VeryHigh', deleteIncompleteScanLevel: '2', scanName: '"${BUILD_NUMBER}"', uploadIncludesPattern: "${caminhoPacote}", vid: "${VID}", vkey: "${VKEY}"      
+                }
+            }
+        }
+
         stage('Veracode SAST - Pipeline Scan') { 
             steps {
                 withCredentials([usernamePassword(credentialsId: 'veracode-credentials', passwordVariable: 'VKEY', usernameVariable: 'VID')]) {
