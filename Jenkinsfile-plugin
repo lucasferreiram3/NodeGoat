@@ -31,7 +31,7 @@ pipeline {
        stage('Veracode SAST - Sandbox Scan') { 
             steps {
                 withCredentials([usernamePassword(credentialsId: 'veracode-credentials', passwordVariable: 'VKEY', usernameVariable: 'VID')]) {
-                    veracode applicationName: 'NodeGoat-Demo', createSandbox: true, criticality: 'VeryHigh', deleteIncompleteScanLevel: '2', sandboxName: 'SANDBOX_Jenkins', scanName: '"${BUILD_NUMBER}"', uploadIncludesPattern: '"${caminhoPacote}"', vid: "${VID}", vkey: "${VKEY}"      
+                    veracode applicationName: 'NodeGoat-Demo', createSandbox: true, criticality: 'VeryHigh', deleteIncompleteScanLevel: '2', sandboxName: 'SANDBOX_Jenkins', scanName: '"${BUILD_NUMBER}"', uploadIncludesPattern: "${caminhoPacote}", vid: "${VID}", vkey: "${VKEY}"      
                 }
             }
         }
