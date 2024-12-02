@@ -35,7 +35,7 @@ jobs:
         env:
           VERACODE_API_KEY_ID: ${{ secrets.VID }}
           VERACODE_API_KEY_SECRET: ${{ secrets.VKEY }}
-        uses: veracode/container_iac_secrets_scanning@v1.0.1
+        uses: veracode/container_iac_secrets_scanning@v1.0.3
         with:
           vid: ${{ env.VERACODE_API_KEY_ID }}
           vkey: ${{ env.VERACODE_API_KEY_SECRET }}
@@ -43,6 +43,6 @@ jobs:
           type: "directory"
           source: "lucasferreiram3/nodegoat:latest"
           format: "image"
-          debug: false
+          debug: true
           fail_build: false
 
