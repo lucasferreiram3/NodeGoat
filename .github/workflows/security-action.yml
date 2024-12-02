@@ -20,8 +20,8 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
-          push: false
-          tags: nodegoat:latest
+          push: true
+          tags: lucasferreiram3/nodegoat:latest
 
   veracode_iac_secrets-scan:
     runs-on: ubuntu-latest
@@ -41,7 +41,7 @@ jobs:
           vkey: ${{ secrets.VERACODE_API_KEY_SECRET }}
           command: "scan" 
           type: "directory"
-          source: "${{ secrets.DOCKERHUB_USERNAME }}/nodegoat:latest"
+          source: "lucasferreiram3/nodegoat:latest"
           format: "image"
           debug: false
           fail_build: false
