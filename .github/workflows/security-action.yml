@@ -41,7 +41,7 @@ jobs:
           vkey: ${{ secrets.VERACODE_API_KEY_SECRET }}
           command: "scan" 
           type: "directory"
-          source: "${{ vars.DOCKERHUB_USERNAME }}/nodegoat:latest"
+          source: "${{ secrets.DOCKERHUB_USERNAME }}/nodegoat:latest"
           format: "image"
           debug: false
           fail_build: false
