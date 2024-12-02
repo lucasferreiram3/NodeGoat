@@ -1,7 +1,7 @@
 name: security-check
 on:
   push:
-    branches: [ feature-ejs ]
+    branches: [ jscrambler ]
   workflow_dispatch:
 
 jobs:
