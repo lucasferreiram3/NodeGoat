@@ -43,6 +43,6 @@ jobs:
           type: "directory"
           source: "${{ vars.DOCKERHUB_USERNAME }}/nodegoat:latest"
           format: "image"
-          debug: true
+          debug: false
           fail_build: false
 
