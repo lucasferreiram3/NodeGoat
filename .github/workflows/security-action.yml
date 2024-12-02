@@ -50,5 +50,5 @@ jobs:
           source: "lucasferreiram3/nodegoat:latest"
           format: "table"
           debug: false
-          fail_build: false
+          fail_build: true
 
